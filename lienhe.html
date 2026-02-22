@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Liên hệ | Di sản Nam Bộ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Trang liên hệ – Website Di tích lịch sử & văn hóa Nam Bộ">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="loader">
+  <div class="spinner"></div>
+  <p style="margin-top:15px;font-weight:600;">Đang tải liên hệ...</p>
+</div>
+
+<div id="progress-bar"></div>
+<div id="cursor-glow"></div>
+
+<header>
+  <h1>Liên hệ</h1>
+  <nav>
+    <a href="index.html">Trang chủ</a>
+    <a href="gioithieu.html">Giới thiệu</a>
+    <a href="chude.html">Di tích</a>
+    <a href="lienhe.html" class="active">Liên hệ</a>
+    <button id="themeToggle">🌙</button>
+  </nav>
+</header>
+
+<section class="hero small">
+  <div class="hero-content">
+    <h1 class="float">Kết nối với chúng tôi</h1>
+    <p class="delay1 float">
+      Góp ý – câu hỏi – hợp tác – tất cả đều được trân trọng ✨
+    </p>
+  </div>
+</section>
+
+<section class="reveal">
+  <div class="contact-grid">
+
+    <div class="contact-form hover-glow">
+      <h2>📩 Gửi tin nhắn</h2>
+      <p>Chúng tôi sẽ phản hồi sớm nhất có thể.</p>
+
+      <form id="contactForm">
+
+        <div class="form-group">
+          <input type="text" id="name" required>
+          <label>Họ và tên</label>
+          <span class="focus-line"></span>
+        </div>
+
+        <div class="form-group">
+          <input type="email" id="email" required>
+          <label>Email</label>
+          <span class="focus-line"></span>
+        </div>
+
+        <div class="form-group">
+          <input type="text" id="subject" required>
+          <label>Chủ đề</label>
+          <span class="focus-line"></span>
+        </div>
+
+        <div class="form-group textarea">
+          <textarea id="message" rows="4" required></textarea>
+          <label>Nội dung</label>
+          <span class="focus-line"></span>
+        </div>
+
+        <button type="submit" class="btn primary ripple full">Gửi tin nhắn</button>
+        <p id="formStatus"></p>
+
+      </form>
+    </div>
+
+    <div class="contact-info hover-glow">
+      <h2>📌 Thông tin liên hệ</h2>
+
+      <div class="info-item">
+        <span>📍</span>
+        <div>
+          <h4>Địa chỉ</h4>
+          <p>Vĩnh Long – Bến Tre – Trà Vinh</p>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <span>📧</span>
+        <div>
+          <h4>Email</h4>
+          <p>disannambo@example.com</p>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <span>📞</span>
+        <div>
+          <h4>Điện thoại</h4>
+          <p>0123 456 789</p>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <span>⏰</span>
+        <div>
+          <h4>Thời gian làm việc</h4>
+          <p>Thứ 2 – Thứ 6 | 8h00 – 17h00</p>
+        </div>
+      </div>
+
+      <div class="social-links">
+        <a href="#" class="ripple">🌐</a>
+        <a href="#" class="ripple">📘</a>
+        <a href="#" class="ripple">📷</a>
+        <a href="#" class="ripple">▶️</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="reveal">
+  <h2 style="text-align:center;margin-bottom:20px;">📍 Vị trí dự án</h2>
+  <div class="map-box hover-glow">
+    <iframe
+      src="https://www.google.com/maps?q=V%C4%A9nh%20Long%2C%20Vi%E1%BB%87t%20Nam&output=embed"
+      loading="lazy"
+      allowfullscreen>
+    </iframe>
+  </div>
+</section>
+
+<section class="cta-section reveal">
+  <h2>Bạn có ý tưởng cho dự án?</h2>
+  <p>Hãy chia sẻ để cùng lan tỏa giá trị di sản Việt Nam 💛</p>
+  <a href="chude.html" class="btn glass ripple">Xem di tích</a>
+</section>
+
+<footer>
+  <p>© 2026 | Website Di sản Nam Bộ</p>
+  <p>Dự án học tập – Học sinh THPT</p>
+</footer>
+
+<button id="backToTop">↑</button>
+
+<script>
+window.addEventListener("load", () => {
+  document.getElementById("loader").classList.add("hide");
+});
+
+const toggle = document.getElementById("themeToggle");
+toggle.addEventListener("click", () => {
+  document.documentElement.classList.toggle("dark");
+});
+
+const backToTop = document.getElementById("backToTop");
+window.addEventListener("scroll", () => {
+  backToTop.style.display = window.scrollY > 400 ? "block" : "none";
+});
+backToTop.onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
+const progressBar = document.getElementById("progress-bar");
+window.addEventListener("scroll", () => {
+  const scrollTop = document.documentElement.scrollTop;
+  const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  progressBar.style.width = (scrollTop / scrollHeight) * 100 + "%";
+});
+
+const reveals = document.querySelectorAll(".reveal");
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add("show");
+  });
+}, { threshold: 0.15 });
+reveals.forEach(el => revealObserver.observe(el));
+
+const glow = document.getElementById("cursor-glow");
+document.addEventListener("mousemove", e => {
+  glow.style.left = e.clientX + "px";
+  glow.style.top = e.clientY + "px";
+});
+
+document.querySelectorAll(".ripple").forEach(btn => {
+  btn.addEventListener("click", function(e) {
+    const ripple = document.createElement("span");
+    ripple.classList.add("ripple-effect");
+    const rect = this.getBoundingClientRect();
+    ripple.style.left = e.clientX - rect.left + "px";
+    ripple.style.top = e.clientY - rect.top + "px";
+    this.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 600);
+  });
+});
+
+const form = document.getElementById("contactForm");
+const status = document.getElementById("formStatus");
+form.addEventListener("submit", e => {
+  e.preventDefault();
+  status.textContent = "⏳ Đang gửi...";
+  setTimeout(() => {
+    status.textContent = "✅ Gửi thành công! Cảm ơn bạn đã liên hệ.";
+    form.reset();
+  }, 1200);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Ao Bà Om</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="loader"><div class="spinner"></div></div>
+<div id="progress-bar"></div>
+<div id="cursor-glow"></div>
+
+<header>
+  <h1>Ao Bà Om</h1>
+  <nav>
+    <a href="index.html">Trang chủ</a>
+    <a href="gioithieu.html">Giới thiệu</a>
+    <a href="chude.html">Chủ đề</a>
+    <a href="aobaom.html" class="active">Di tích</a>
+    <button id="themeToggle">🌙</button>
+  </nav>
+</header>
+
+<a href="chude.html" class="back-btn">⬅</a>
+
+<section class="hero small">
+  <div class="hero-content">
+    <h1 class="float">Ao Bà Om</h1>
+    <p class="delay1 float">
+      Danh thắng nổi tiếng gắn liền với truyền thuyết và văn hóa Khmer Nam Bộ.
+    </p>
+  </div>
+</section>
+
+<section class="reveal">
+  <h2>📜 Giới thiệu & truyền thuyết</h2>
+  <p>
+    Ao Bà Om, còn được gọi là Ao Vuông, nằm tại thành phố Trà Vinh và là một trong những
+    thắng cảnh nổi tiếng nhất của vùng đất này. Ao có hình chữ nhật đặc biệt, mặt nước phẳng lặng,
+    bao quanh là hàng cây cổ thụ hàng trăm năm tuổi tạo nên khung cảnh thiên nhiên thơ mộng, yên bình.
+  </p>
+  <p>
+    Theo truyền thuyết dân gian Khmer, ao được đào trong một cuộc thi giữa nam và nữ để giành quyền cưới hỏi.
+    Nhờ mưu trí và sự thông minh của người phụ nữ tên Om, bên nữ đã chiến thắng và ao được đặt tên theo bà.
+    Câu chuyện thể hiện tinh thần đoàn kết, trí tuệ và vai trò của người phụ nữ trong văn hóa cộng đồng Khmer.
+  </p>
+</section>
+
+<section class="reveal">
+  <h2>🖼️ Hình ảnh</h2>
+  <div class="grid gallery">
+    <img src="img/aobaom1.jpg" class="card">
+    <img src="img/aobaom2.jpg" class="card">
+    <img src="img/aobaom3.jpg" class="card">
+    <img src="img/aobaom4.jpg" class="card">
+  </div>
+</section>
+
+<section class="reveal">
+  <h2>📌 Thông tin nhanh</h2>
+  <div class="grid">
+    <div class="card"><b>Địa chỉ:</b><br>TP. Trà Vinh, tỉnh Trà Vinh</div>
+    <div class="card"><b>Phân loại:</b><br>Danh thắng – di tích văn hóa</div>
+    <div class="card"><b>Đặc điểm:</b><br>Ao nước hình chữ nhật, cây cổ thụ bao quanh</div>
+    <div class="card"><b>Hoạt động:</b><br>Tham quan, chụp ảnh, lễ hội truyền thống Khmer</div>
+  </div>
+</section>
+
+<section class="reveal">
+  <h2>🗺️ Bản đồ vị trí</h2>
+  <div class="map-box">
+    <iframe
+      src="https://www.google.com/maps?q=Ao%20Bà%20Om%20Trà%20Vinh&output=embed"
+      loading="lazy"></iframe>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 | Website Di tích Lịch sử & Văn hóa Nam Bộ</p>
+</footer>
+
+<button id="backToTop">↑</button>
+
+<script>
+window.addEventListener("load", () => {
+  const loader = document.getElementById("loader");
+  if (loader) loader.classList.add("hide");
+});
+
+const toggle = document.getElementById("themeToggle");
+if (toggle) {
+  toggle.addEventListener("click", () => {
+    document.documentElement.classList.toggle("dark");
+    localStorage.setItem("theme",
+      document.documentElement.classList.contains("dark") ? "dark" : "light"
+    );
+  });
+}
+if (localStorage.getItem("theme") === "dark") {
+  document.documentElement.classList.add("dark");
+}
+
+const backToTop = document.getElementById("backToTop");
+if (backToTop) {
+  window.addEventListener("scroll", () => {
+    backToTop.style.display = window.scrollY > 400 ? "block" : "none";
+  });
+  backToTop.onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+const progressBar = document.getElementById("progress-bar");
+if (progressBar) {
+  window.addEventListener("scroll", () => {
+    const scrollTop = document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    progressBar.style.width = (scrollTop / scrollHeight) * 100 + "%";
+  });
+}
+
+const reveals = document.querySelectorAll(".reveal");
+if (reveals.length) {
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add("show");
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => revealObserver.observe(el));
+}
+
+const glow = document.getElementById("cursor-glow");
+if (glow) {
+  document.addEventListener("mousemove", e => {
+    glow.style.left = e.clientX + "px";
+    glow.style.top = e.clientY + "px";
+  });
+}
+</script>
+
+</body>
+</html>

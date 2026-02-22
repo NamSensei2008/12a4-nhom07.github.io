@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Chùa Tiên Châu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="loader"><div class="spinner"></div></div>
+<div id="progress-bar"></div>
+<div id="cursor-glow"></div>
+
+<header>
+  <h1>Chùa Tiên Châu</h1>
+  <nav>
+    <a href="index.html">Trang chủ</a>
+    <a href="gioithieu.html">Giới thiệu</a>
+    <a href="chude.html">Chủ đề</a>
+    <a href="chuathienchau.html" class="active">Di tích</a>
+    <button id="themeToggle">🌙</button>
+  </nav>
+</header>
+
+<a href="chude.html" class="back-btn">⬅</a>
+
+<section class="hero small">
+  <div class="hero-content">
+    <h1 class="float">Chùa Tiên Châu</h1>
+    <p class="delay1 float">
+      Ngôi chùa cổ bên sông Tiền mang nét đẹp Phật giáo truyền thống.
+    </p>
+  </div>
+</section>
+
+<section class="reveal">
+  <h2>📜 Giới thiệu & lịch sử</h2>
+  <p>
+    Chùa Tiên Châu tọa lạc trên cù lao An Bình, tỉnh Vĩnh Long, nổi bật với không gian yên tĩnh,
+    thoáng đãng và phong cảnh sông nước hữu tình. Chùa mang kiến trúc Phật giáo truyền thống,
+    là điểm đến tâm linh quen thuộc của người dân địa phương.
+  </p>
+  <p>
+    Chùa được xây dựng vào thế kỷ XVIII, gắn liền với quá trình khai hoang lập làng của cư dân vùng Nam Bộ.
+    Trải qua nhiều lần trùng tu, chùa vẫn giữ được vẻ cổ kính và vai trò trung tâm sinh hoạt tín ngưỡng của cộng đồng.
+  </p>
+</section>
+
+<section class="reveal">
+  <h2>🖼️ Hình ảnh</h2>
+  <div class="grid gallery">
+    <img src="img/chuathienchau1.jpg" class="card">
+    <img src="img/chuathienchau2.jpg" class="card">
+    <img src="img/chuathienchau3.jpg" class="card">
+    <img src="img/chuathienchau4.jpg" class="card">
+  </div>
+</section>
+
+<section class="reveal">
+  <h2>📌 Thông tin nhanh</h2>
+  <div class="grid">
+    <div class="card"><b>Địa chỉ:</b><br>Cù lao An Bình, huyện Long Hồ, Vĩnh Long</div>
+    <div class="card"><b>Phân loại:</b><br>Di tích văn hóa – tôn giáo</div>
+    <div class="card"><b>Đặc điểm:</b><br>Kiến trúc Phật giáo truyền thống</div>
+    <div class="card"><b>Hoạt động:</b><br>Hành hương, lễ Phật, tham quan</div>
+  </div>
+</section>
+
+<section class="reveal">
+  <h2>🗺️ Bản đồ vị trí</h2>
+  <div class="map-box">
+    <iframe
+      src="https://www.google.com/maps?q=Chùa%20Tiên%20Châu%20Vĩnh%20Long&output=embed"
+      loading="lazy"></iframe>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 | Website Di tích Lịch sử & Văn hóa Nam Bộ</p>
+</footer>
+
+<button id="backToTop">↑</button>
+
+<script>
+window.addEventListener("load", () => {
+  const loader = document.getElementById("loader");
+  if (loader) loader.classList.add("hide");
+});
+
+const toggle = document.getElementById("themeToggle");
+if (toggle) {
+  toggle.addEventListener("click", () => {
+    document.documentElement.classList.toggle("dark");
+    localStorage.setItem("theme",
+      document.documentElement.classList.contains("dark") ? "dark" : "light"
+    );
+  });
+}
+if (localStorage.getItem("theme") === "dark") {
+  document.documentElement.classList.add("dark");
+}
+
+const backToTop = document.getElementById("backToTop");
+if (backToTop) {
+  window.addEventListener("scroll", () => {
+    backToTop.style.display = window.scrollY > 400 ? "block" : "none";
+  });
+  backToTop.onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+const progressBar = document.getElementById("progress-bar");
+if (progressBar) {
+  window.addEventListener("scroll", () => {
+    const scrollTop = document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    progressBar.style.width = (scrollTop / scrollHeight) * 100 + "%";
+  });
+}
+
+const reveals = document.querySelectorAll(".reveal");
+if (reveals.length) {
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add("show");
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => revealObserver.observe(el));
+}
+
+const glow = document.getElementById("cursor-glow");
+if (glow) {
+  document.addEventListener("mousemove", e => {
+    glow.style.left = e.clientX + "px";
+    glow.style.top = e.clientY + "px";
+  });
+}
+</script>
+
+</body>
+</html>

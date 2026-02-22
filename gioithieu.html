@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Giới thiệu | Di sản Nam Bộ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Giới thiệu dự án website Di sản Nam Bộ">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="loader">
+  <div class="spinner"></div>
+  <p style="margin-top:15px;font-weight:600;">Đang tải giới thiệu...</p>
+</div>
+
+<div id="progress-bar"></div>
+<div id="cursor-glow"></div>
+
+<header>
+  <h1>Giới thiệu</h1>
+  <nav>
+    <a href="index.html">Trang chủ</a>
+    <a href="gioithieu.html" class="active">Giới thiệu</a>
+    <a href="chude.html">Di tích</a>
+    <a href="lienhe.html">Liên hệ</a>
+    <button id="themeToggle">🌙</button>
+  </nav>
+</header>
+
+<section class="hero small">
+  <div class="hero-content">
+    <h1 class="float">Về dự án Di sản Nam Bộ</h1>
+    <p class="delay1 float">
+      Hành trình gìn giữ và lan tỏa giá trị văn hóa lịch sử quê hương
+    </p>
+  </div>
+</section>
+
+<section class="reveal">
+  <div class="section-card hover-glow">
+    <h2>🎯 Mục tiêu dự án</h2>
+    <p>
+      Website Di sản Nam Bộ được xây dựng nhằm giới thiệu các di tích lịch sử,
+      văn hóa tiêu biểu tại khu vực Nam Bộ, giúp học sinh và cộng đồng hiểu rõ hơn
+      về giá trị truyền thống, từ đó nâng cao ý thức bảo tồn và phát huy di sản dân tộc.
+    </p>
+    <p>
+      Dự án không chỉ mang tính học tập mà còn hướng tới việc tạo ra một nền tảng
+      trực quan, sinh động và hiện đại để quảng bá văn hóa Việt Nam tới thế hệ trẻ.
+    </p>
+  </div>
+</section>
+
+<section class="reveal">
+  <div class="section-card hover-glow">
+    <h2>📚 Nội dung chính</h2>
+    <ul class="fancy-list">
+      <li>Giới thiệu lịch sử hình thành và giá trị văn hóa của từng di tích.</li>
+      <li>Hình ảnh minh họa trực quan, bản đồ định vị chính xác.</li>
+      <li>Thiết kế hiện đại, hỗ trợ giao diện sáng – tối.</li>
+      <li>Trải nghiệm tương tác mượt mà với hiệu ứng chuyển động sinh động.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="reveal">
+  <div class="section-card hover-glow">
+    <h2>🌏 Ý nghĩa giáo dục</h2>
+    <p>
+      Thông qua việc tìm hiểu các di tích lịch sử, học sinh có cơ hội tiếp cận
+      trực tiếp với những câu chuyện của quá khứ, từ đó bồi dưỡng lòng yêu nước,
+      niềm tự hào dân tộc và ý thức trách nhiệm trong việc bảo tồn di sản.
+    </p>
+    <p>
+      Website cũng là công cụ hỗ trợ học tập trực tuyến, giúp việc tiếp cận kiến thức
+      trở nên trực quan, sinh động và hấp dẫn hơn.
+    </p>
+  </div>
+</section>
+
+<section class="reveal">
+  <div class="section-card hover-glow">
+    <h2>👨‍🎓 Đối tượng hướng đến</h2>
+    <ul class="fancy-list">
+      <li>Học sinh – sinh viên yêu thích lịch sử và văn hóa Việt Nam.</li>
+      <li>Giáo viên sử dụng làm tài liệu hỗ trợ giảng dạy.</li>
+      <li>Du khách muốn tìm hiểu điểm đến văn hóa tại Nam Bộ.</li>
+      <li>Cộng đồng quan tâm đến bảo tồn di sản dân tộc.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="cta-section reveal">
+  <h2>Khám phá kho tàng di sản Việt Nam</h2>
+  <p>Cùng chúng tôi lan tỏa giá trị văn hóa Nam Bộ đến cộng đồng 💛</p>
+  <a href="chude.html" class="btn glass ripple">Xem di tích</a>
+</section>
+
+<footer>
+  <p>© 2026 | Website Di sản Nam Bộ</p>
+  <p>Dự án học tập – Học sinh THPT</p>
+</footer>
+
+<button id="backToTop">↑</button>
+
+<script>
+window.addEventListener("load", () => {
+  document.getElementById("loader").classList.add("hide");
+});
+
+const toggle = document.getElementById("themeToggle");
+toggle.addEventListener("click", () => {
+  document.documentElement.classList.toggle("dark");
+});
+
+const backToTop = document.getElementById("backToTop");
+window.addEventListener("scroll", () => {
+  backToTop.style.display = window.scrollY > 400 ? "block" : "none";
+});
+backToTop.onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
+const progressBar = document.getElementById("progress-bar");
+window.addEventListener("scroll", () => {
+  const scrollTop = document.documentElement.scrollTop;
+  const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  progressBar.style.width = (scrollTop / scrollHeight) * 100 + "%";
+});
+
+const reveals = document.querySelectorAll(".reveal");
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add("show");
+  });
+}, { threshold: 0.15 });
+reveals.forEach(el => revealObserver.observe(el));
+
+const glow = document.getElementById("cursor-glow");
+document.addEventListener("mousemove", e => {
+  glow.style.left = e.clientX + "px";
+  glow.style.top = e.clientY + "px";
+});
+
+document.querySelectorAll(".ripple").forEach(btn => {
+  btn.addEventListener("click", function(e) {
+    const ripple = document.createElement("span");
+    ripple.classList.add("ripple-effect");
+    const rect = this.getBoundingClientRect();
+    ripple.style.left = e.clientX - rect.left + "px";
+    ripple.style.top = e.clientY - rect.top + "px";
+    this.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 600);
+  });
+});
+</script>
+
+</body>
+</html>

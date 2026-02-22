@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Chùa Vàm Ray</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="loader"><div class="spinner"></div></div>
+<div id="progress-bar"></div>
+<div id="cursor-glow"></div>
+
+<header>
+  <h1>Chùa Vàm Ray</h1>
+  <nav>
+    <a href="index.html">Trang chủ</a>
+    <a href="gioithieu.html">Giới thiệu</a>
+    <a href="chude.html">Chủ đề</a>
+    <a href="chuavamray.html" class="active">Di tích</a>
+    <button id="themeToggle">🌙</button>
+  </nav>
+</header>
+
+<a href="chude.html" class="back-btn">⬅</a>
+
+<section class="hero small">
+  <div class="hero-content">
+    <h1 class="float">Chùa Vàm Ray</h1>
+    <p class="delay1 float">
+      Ngôi chùa Khmer lớn và đẹp nhất Nam Bộ với kiến trúc Angkor hùng vĩ.
+    </p>
+  </div>
+</section>
+
+<section class="reveal">
+  <h2>📜 Giới thiệu & lịch sử</h2>
+  <p>
+    Chùa Vàm Ray tọa lạc tại huyện Trà Cú, tỉnh Trà Vinh, nổi bật với quy mô đồ sộ,
+    mái chùa cao vút và các họa tiết chạm khắc tinh xảo mang đậm phong cách kiến trúc Angkor.
+  </p>
+  <p>
+    Chùa được xây dựng từ thế kỷ XIX và trải qua nhiều đợt trùng tu lớn,
+    trở thành một trong những công trình Phật giáo Khmer tiêu biểu nhất khu vực Nam Bộ.
+  </p>
+</section>
+
+<section class="reveal">
+  <h2>🖼️ Hình ảnh</h2>
+  <div class="grid gallery">
+    <img src="img/chuavamray1.jpg" class="card">
+    <img src="img/chuavamray2.jpg" class="card">
+    <img src="img/chuavamray3.jpg" class="card">
+    <img src="img/chuavamray4.jpg" class="card">
+  </div>
+</section>
+
+<section class="reveal">
+  <h2>📌 Thông tin nhanh</h2>
+  <div class="grid">
+    <div class="card"><b>Địa chỉ:</b><br>Huyện Trà Cú, tỉnh Trà Vinh</div>
+    <div class="card"><b>Phân loại:</b><br>Di tích kiến trúc – tôn giáo Khmer</div>
+    <div class="card"><b>Đặc điểm:</b><br>Quy mô lớn, kiến trúc Angkor</div>
+    <div class="card"><b>Hoạt động:</b><br>Lễ hội Khmer, tham quan, nghiên cứu</div>
+  </div>
+</section>
+
+<section class="reveal">
+  <h2>🗺️ Bản đồ vị trí</h2>
+  <div class="map-box">
+    <iframe
+      src="https://www.google.com/maps?q=Chùa%20Vàm%20Ray%20Trà%20Vinh&output=embed"
+      loading="lazy"></iframe>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 | Website Di tích Lịch sử & Văn hóa Nam Bộ</p>
+</footer>
+
+<button id="backToTop">↑</button>
+
+<script>
+window.addEventListener("load", () => {
+  const loader = document.getElementById("loader");
+  if (loader) loader.classList.add("hide");
+});
+
+const toggle = document.getElementById("themeToggle");
+if (toggle) {
+  toggle.addEventListener("click", () => {
+    document.documentElement.classList.toggle("dark");
+    localStorage.setItem("theme",
+      document.documentElement.classList.contains("dark") ? "dark" : "light"
+    );
+  });
+}
+if (localStorage.getItem("theme") === "dark") {
+  document.documentElement.classList.add("dark");
+}
+
+const backToTop = document.getElementById("backToTop");
+if (backToTop) {
+  window.addEventListener("scroll", () => {
+    backToTop.style.display = window.scrollY > 400 ? "block" : "none";
+  });
+  backToTop.onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+const progressBar = document.getElementById("progress-bar");
+if (progressBar) {
+  window.addEventListener("scroll", () => {
+    const scrollTop = document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    progressBar.style.width = (scrollTop / scrollHeight) * 100 + "%";
+  });
+}
+
+const reveals = document.querySelectorAll(".reveal");
+if (reveals.length) {
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add("show");
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => revealObserver.observe(el));
+}
+
+const glow = document.getElementById("cursor-glow");
+if (glow) {
+  document.addEventListener("mousemove", e => {
+    glow.style.left = e.clientX + "px";
+    glow.style.top = e.clientY + "px";
+  });
+}
+</script>
+
+</body>
+</html>

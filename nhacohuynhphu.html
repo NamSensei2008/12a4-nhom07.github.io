@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Nhà cổ Huỳnh Phủ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="loader"><div class="spinner"></div></div>
+<div id="progress-bar"></div>
+<div id="cursor-glow"></div>
+
+<header>
+  <h1>Nhà cổ Huỳnh Phủ</h1>
+  <nav>
+    <a href="index.html">Trang chủ</a>
+    <a href="gioithieu.html">Giới thiệu</a>
+    <a href="chude.html">Chủ đề</a>
+    <a href="nhacohuynhphu.html" class="active">Di tích</a>
+    <button id="themeToggle">🌙</button>
+  </nav>
+</header>
+
+<a href="chude.html" class="back-btn">⬅</a>
+
+<section class="hero small">
+  <div class="hero-content">
+    <h1 class="float">Nhà cổ Huỳnh Phủ</h1>
+    <p class="delay1 float">
+      Di sản kiến trúc nhà cổ tiêu biểu của vùng đất Bến Tre.
+    </p>
+  </div>
+</section>
+
+<section class="reveal">
+  <h2>📜 Giới thiệu & lịch sử</h2>
+  <p>
+    Nhà cổ Huỳnh Phủ được xây dựng cách đây hơn 100 năm, là một trong những công trình
+    kiến trúc nhà ở cổ tiêu biểu còn được bảo tồn khá nguyên vẹn tại Nam Bộ.
+    Ngôi nhà mang phong cách kiến trúc truyền thống kết hợp giữa nghệ thuật chạm khắc
+    dân gian và kỹ thuật xây dựng tinh xảo của các nghệ nhân xưa.
+  </p>
+  <p>
+    Toàn bộ kết cấu nhà chủ yếu bằng gỗ quý, với hệ thống cột, kèo, mái ngói âm dương
+    và các hoa văn chạm khắc tinh tế thể hiện đời sống sinh hoạt, tín ngưỡng và thẩm mỹ
+    của người dân Nam Bộ trong quá khứ. Hiện nay, nơi đây là điểm tham quan văn hóa – du lịch
+    hấp dẫn đối với du khách trong và ngoài nước.
+  </p>
+</section>
+
+<section class="reveal">
+  <h2>🖼️ Hình ảnh</h2>
+  <div class="grid gallery">
+    <img src="img/huynhphu1.jpg" class="card">
+    <img src="img/huynhphu2.jpg" class="card">
+    <img src="img/huynhphu3.jpg" class="card">
+    <img src="img/huynhphu4.jpg" class="card">
+  </div>
+</section>
+
+<section class="reveal">
+  <h2>📌 Thông tin nhanh</h2>
+  <div class="grid">
+    <div class="card"><b>Địa chỉ:</b><br>Huyện Mỏ Cày, tỉnh Bến Tre</div>
+    <div class="card"><b>Niên đại:</b><br>Trên 100 năm</div>
+    <div class="card"><b>Phân loại:</b><br>Di tích kiến trúc – văn hóa</div>
+    <div class="card"><b>Giá trị:</b><br>Bảo tồn kiến trúc nhà cổ Nam Bộ</div>
+  </div>
+</section>
+
+<section class="reveal">
+  <h2>🗺️ Bản đồ vị trí</h2>
+  <div class="map-box">
+    <iframe
+      src="https://www.google.com/maps?q=Nhà%20cổ%20Huỳnh%20Phủ%20Bến%20Tre&output=embed"
+      loading="lazy"></iframe>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 | Website Di tích Lịch sử & Văn hóa Nam Bộ</p>
+</footer>
+
+<button id="backToTop">↑</button>
+
+<script>
+window.addEventListener("load", () => {
+  const loader = document.getElementById("loader");
+  if (loader) loader.classList.add("hide");
+});
+
+const toggle = document.getElementById("themeToggle");
+if (toggle) {
+  toggle.addEventListener("click", () => {
+    document.documentElement.classList.toggle("dark");
+    localStorage.setItem("theme",
+      document.documentElement.classList.contains("dark") ? "dark" : "light"
+    );
+  });
+}
+if (localStorage.getItem("theme") === "dark") {
+  document.documentElement.classList.add("dark");
+}
+
+const backToTop = document.getElementById("backToTop");
+if (backToTop) {
+  window.addEventListener("scroll", () => {
+    backToTop.style.display = window.scrollY > 400 ? "block" : "none";
+  });
+  backToTop.onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+const progressBar = document.getElementById("progress-bar");
+if (progressBar) {
+  window.addEventListener("scroll", () => {
+    const scrollTop = document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    progressBar.style.width = (scrollTop / scrollHeight) * 100 + "%";
+  });
+}
+
+const reveals = document.querySelectorAll(".reveal");
+if (reveals.length) {
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add("show");
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => revealObserver.observe(el));
+}
+
+const glow = document.getElementById("cursor-glow");
+if (glow) {
+  document.addEventListener("mousemove", e => {
+    glow.style.left = e.clientX + "px";
+    glow.style.top = e.clientY + "px";
+  });
+}
+</script>
+
+</body>
+</html>
